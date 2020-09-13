@@ -1,1 +1,28 @@
-<p>login works!</p>
+<mat-grid-list cols="4" rowHeight="70px" class="login-block">
+    <mat-grid-tile [colspan]="1"></mat-grid-tile>
+    <mat-grid-tile [colspan]="2">
+        <mat-form-field appearance="fill" class="login-form-group">
+            <mat-label>Username</mat-label>
+            <input matInput />
+        </mat-form-field> 
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1"></mat-grid-tile>
+    <mat-grid-tile [colspan]="1"></mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2">
+        <mat-form-field appearance="fill" class="login-form-group">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput />
+        </mat-form-field> 
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1"></mat-grid-tile>
+    <mat-grid-tile [colspan]="1"></mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2">
+        <div class="login-form-group ">
+            <button mat-raised-button class="login-btn" color="primary">Login</button>
+        </div> 
+    </mat-grid-tile>
+</mat-grid-list>
