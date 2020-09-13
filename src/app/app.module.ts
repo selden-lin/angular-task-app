@@ -8,6 +8,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SingleListViewComponent } from './single-list-view/single-list-view.component';
 import { TimeGraphComponent } from './time-graph/time-graph.component';
 import { TaskViewComponent } from './task-view/task-view.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +24,18 @@ import { TaskViewComponent } from './task-view/task-view.component';
     DashboardComponent,
     SingleListViewComponent,
     TimeGraphComponent,
-    TaskViewComponent
+    TaskViewComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
