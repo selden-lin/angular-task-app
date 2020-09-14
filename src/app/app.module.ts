@@ -5,12 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { SingleListViewComponent } from './single-list-view/single-list-view.component';
 import { TimeGraphComponent } from './time-graph/time-graph.component';
 import { TaskViewComponent } from './task-view/task-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LoginModule } from './login/login.module';
+import { SingleListViewModule } from './single-list-view/singleListView.module';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -19,11 +19,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    SingleListViewComponent,
     TimeGraphComponent,
     TaskViewComponent,
     PageNotFoundComponent
@@ -37,7 +37,8 @@ import {MatListModule} from '@angular/material/list';
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    LoginModule
+    LoginModule,
+    SingleListViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]

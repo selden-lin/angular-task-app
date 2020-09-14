@@ -1,13 +1,31 @@
-<mat-toolbar color="primary">
-    <div>
-    <a mat-button  [routerLink]="'/'">Dashboard</a>
-    <a mat-button  [routerLink]="'/timeGraph'">Time graph</a>
-    <a mat-button  [routerLink]="'/login'">Login</a>
-    </div>
-</mat-toolbar>
+<mat-sidenav-container class="body-container">
+    <mat-sidenav #sidenav mode="side" class="sidenav">
+		<div>
+			<a mat-button [routerLink]="'/'">Dashboard</a>
+			
+			<a mat-button [routerLink]="'/login'">Login</a>
+			<a mat-button [routerLink]="'/list'">Single list</a>
+		</div>
+	</mat-sidenav>
 
-<mat-drawer-container class="body-container">
-    <mat-drawer-content>
-        <router-outlet></router-outlet>
-    </mat-drawer-content>
-</mat-drawer-container>
+    <mat-sidenav-content class="body-container">
+        <mat-toolbar color="primary">
+			<button
+				mat-icon-button
+				(click)="sidenav.toggle()"
+			>
+				<mat-icon>menu</mat-icon>
+			</button>
+			<a mat-button [routerLink]="'/timeGraph'">Time graph</a>
+		</mat-toolbar>
+
+		<mat-drawer-container class="body-container">
+			<mat-drawer-content>
+				<router-outlet></router-outlet>
+			</mat-drawer-content>
+		</mat-drawer-container>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+

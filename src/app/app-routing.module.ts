@@ -5,6 +5,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {TimeGraphComponent} from './time-graph/time-graph.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {LoginComponent} from './login/login.component';
+import {SingleListViewComponent} from './single-list-view/single-list-view.component';
 
 const routes: Routes = [
     {
@@ -19,6 +20,10 @@ const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'list',
+        component: SingleListViewComponent
     },
     {
         path: '**',
