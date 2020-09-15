@@ -5,6 +5,11 @@ import {SingleListViewComponent} from './single-list-view.component';
 import {ShortenDate} from './shortenDate.pipe';
 
 import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
     declarations: [
@@ -13,7 +18,12 @@ import {MatTableModule} from '@angular/material/table';
     ],
     imports: [
         CommonModule,
-        MatTableModule
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDividerModule
     ],
     providers: [],
 })

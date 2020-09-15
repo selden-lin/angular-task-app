@@ -1,7 +1,32 @@
 @import '../../../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css';
 
 table {
+    width: 100%;
+}
+
+.task-container {
     width: 90%;
     margin: auto;
     margin-top: 50px;
-  }
+}
+
+.new-task-container {
+    width: 100%;
+    position: relative;
+}
+
+.new-task-input {
+    width: 100%;
+    margin: 10px 0px 0 0px;
+    border-radius: 0 200px 0 0;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 0 50px 50px 0 !important;
+}
+
+.new-task-btn {
+    position: absolute;
+    top: 13px;
+    right: 0px;
+}

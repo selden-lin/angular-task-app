@@ -1,22 +1,39 @@
-<table mat-table [dataSource]="taskListItems">
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
+<div class="task-container">
+    <h2>Tasks</h2>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="taskListItems">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="timeSpent">
-        <th mat-header-cell *matHeaderCellDef>Time spent</th>
-        <td mat-cell *matCellDef="let element">{{ element.timeSpent }}</td>
-    </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="timeSpent">
+                <th mat-header-cell *matHeaderCellDef>Time spent</th>
+                <td mat-cell *matCellDef="let element">{{ element.timeSpent }}</td>
+            </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="dueDate">
-        <th mat-header-cell *matHeaderCellDef>Due date</th>
-        <td mat-cell *matCellDef="let element">{{ element.dueDate | shortenDate}}</td>
-    </ng-container>
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef>Due date</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.dueDate | shortenDate }}
+                </td>
+            </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="new-task-container">
+        <mat-form-field appearance="fill" class="new-task-input">
+            <mat-label>New task</mat-label>
+            <input matInput />
+        </mat-form-field>
+        <button mat-mini-fab color="primary" class="new-task-btn">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>
