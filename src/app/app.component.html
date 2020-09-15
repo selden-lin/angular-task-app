@@ -2,7 +2,7 @@
     <mat-sidenav #sidenav mode="side" class="sidenav">
 		<div>
 			<a mat-button [routerLink]="'/'">Dashboard</a>
-			
+			<a mat-button [routerLink]="'/timeGraph'">Time graph</a>
 			<a mat-button [routerLink]="'/login'">Login</a>
 			<a mat-button [routerLink]="'/list'">Single list</a>
 		</div>
@@ -16,7 +16,6 @@
 			>
 				<mat-icon>menu</mat-icon>
 			</button>
-			<a mat-button [routerLink]="'/timeGraph'">Time graph</a>
 		</mat-toolbar>
 
 		<mat-drawer-container class="body-container">
