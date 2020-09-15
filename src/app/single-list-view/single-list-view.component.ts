@@ -18,8 +18,21 @@ export class SingleListViewComponent implements OnInit {
             {
                 name: "potato",
                 timeSpent: 0,
-                dueDate: new Date("9//12/2020")
+                dueDate: new Date("9/12/2020")
+            },
+            {
+                name: "math",
+                timeSpent: 0,
+                dueDate: new Date("9/11/2020")
             }
-        ]
+        ].sort((task1, task2) => {
+            if (task1.dueDate < task2.dueDate) {
+                return -1;
+            } else if (task1.dueDate > task2.dueDate) {
+                return 1;
+            } else {
+                return 0;
+            }
+        })
     }
 }
