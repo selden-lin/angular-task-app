@@ -1,11 +1,16 @@
 # angular-task-app
-- Is task app aimed at university/high school students. It will allow students to list tasks and also record how long these tasks take. Using these lengths, it will help other students plan out and give out good estimations how long projects will take for certain courses.
-- the sharing of task completion times will be a later feature
-- tasks will be grouped on course and type (school, errands, etc)
-
+- Is task app that divides tasks into types and lets users enter when they may be due and how much time they have spent on them 
+- tasks will be grouped into school, work and leisure/errands
+  
 # pages
 - login
 - dashboard
 - individual list view
 - graph of how much time you spent on different types of tasks
 - page to update time spent on a task
+
+# future plans
+- add calendar view to see all tasks
+- add database to store data
+- allow students to see how long projects in courses take to better plan schedules
+

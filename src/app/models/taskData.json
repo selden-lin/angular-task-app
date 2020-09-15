@@ -1,0 +1,18 @@
+{
+    "errands and leisure": {
+            "groceries": [
+            {
+                "name": "carrot",
+                "dueDate": null,
+                "timeSpent": 0
+            },
+            {
+                "name": "potato",
+                "dueDate": null,
+                "timeSpent": 0
+            }
+        ]
+    },
+    "school": [],
+    "work": []
+}
