@@ -1,10 +1,17 @@
-import data from "./taskData.json";
+import * as data from './taskData.json';
 
 export default class TaskDataDb {
     taskData: {}
 
     constructor() {
-        this.taskData = data;
+        this.taskData = data.default;
+    }
+
+    getTaskListNames(taskCategory: string) {
+        if(this.taskData[taskCategory]) {
+            return Object.keys(this.taskData[taskCategory])
+        }
+        return []
     }
 
     getTasksForList(taskCategory: string, taskList: string) {

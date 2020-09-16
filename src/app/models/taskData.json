@@ -1,14 +1,16 @@
 {
-    "errands and leisure": {
+    "errands/leisure": {
             "groceries": [
             {
+                "id": 0,
                 "name": "carrot",
                 "dueDate": null,
                 "timeSpent": 0
             },
             {
+                "id": 1,
                 "name": "potato",
-                "dueDate": null,
+                "dueDate": "9/15/2020",
                 "timeSpent": 0
             }
         ]

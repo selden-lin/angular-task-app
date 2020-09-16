@@ -6,3 +6,28 @@
     display: block;
     padding: 5px 80px 5px 80px;
 }
+
+.mat-expansion-panel-header {
+    background-color: #c2185b;
+}
+
+.mat-accordion .mat-expansion-panel:last-of-type {
+    border-radius: 0px!important;
+}
+
+.mat-expansion-panel-header:hover
+,.mat-expansion-panel-header:active
+,.mat-expansion-panel-header:focus
+,.mat-expansion-panel-header:visited
+,.mat-expansion-panel-header {
+    background-color:#c2185b!important;
+}
+
+.expansion-panel-content {
+    margin-top: 20px;
+}
+
+.add-list-icon {
+    width: 100%;
+    text-align: center;
+}
