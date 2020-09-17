@@ -7,6 +7,10 @@ export default class TaskDataDb {
         this.taskData = data.default;
     }
 
+    getTaskListTypes () {
+        return Object.keys(this.taskData);
+    }
+
     getTaskListNames(taskCategory: string) {
         if(this.taskData[taskCategory]) {
             return Object.keys(this.taskData[taskCategory])
