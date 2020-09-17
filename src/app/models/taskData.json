@@ -15,6 +15,21 @@
             }
         ]
     },
-    "school": [],
-    "work": []
+    "school": {
+        "csc311": [
+        {
+            "id": 0,
+            "name": "assignment 1",
+            "dueDate": "10/8/2020",
+            "timeSpent": 0
+        },
+        {
+            "id": 1,
+            "name": "quiz 1",
+            "dueDate": "10/15/2020",
+            "timeSpent": 0
+        }
+    ]
+},
+    "work": {}
 }

@@ -7,9 +7,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class ShortenDate implements PipeTransform {
     transform (date) {
-        if (typeof date === "object") {
+        console.log(date)
+        if (typeof date === 'string') {
+            date = new Date(date);
             return `${date.getMonth() + 1}/${date.getUTCDate()}/${date.getFullYear()}`;
-        } 
+        }
+        
         return "No due date";
     }
 }

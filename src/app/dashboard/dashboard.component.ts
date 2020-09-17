@@ -65,7 +65,6 @@ export class DashboardComponent implements OnInit {
                 'list type': "No data",
             });
         }
-        console.log(this.todayTaskTable)
     }
 }
 

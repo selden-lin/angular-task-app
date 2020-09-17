@@ -7,7 +7,7 @@
         </mat-expansion-panel-header>
         <div class="expansion-panel-content">
             <a mat-button 
-                [routerLink]="'/taskList/'+type+'/'+list" 
+                [routerLink]="['/taskList', type, list]" 
                 *ngFor="let list of taskLists[type]"
                 >{{list}}</a>
             <p>
