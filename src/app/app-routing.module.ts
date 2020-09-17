@@ -22,7 +22,7 @@ const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'list',
+        path: 'taskList/:type/:name',
         component: SingleListViewComponent
     },
     {

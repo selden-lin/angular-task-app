@@ -6,7 +6,10 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="expansion-panel-content">
-            <a mat-button *ngFor="let list of taskLists[type]">{{list}}</a>
+            <a mat-button 
+                [routerLink]="'/taskList/'+type+'/'+list" 
+                *ngFor="let list of taskLists[type]"
+                >{{list}}</a>
             <p>
                 <a mat-button (click)="openDialog()" class="add-list-icon"><mat-icon aria-hidden="false">add</mat-icon></a>
             </p>

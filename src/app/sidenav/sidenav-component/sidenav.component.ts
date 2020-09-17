@@ -24,7 +24,6 @@ export class SidenavComponent implements OnInit {
             let type = this.listTypes[x];
             let taskListNames = this.db.getTaskListNames(type);
             this.taskLists[type] = taskListNames;
-            console.log(taskListNames)
         }
     }
 
