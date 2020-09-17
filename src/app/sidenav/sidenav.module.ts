@@ -9,7 +9,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,9 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatIconModule,
         MatListModule,
         MatExpansionModule,
-        MatDialogModule
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule
     ],
     exports: [
         SidenavComponent
