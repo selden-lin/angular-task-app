@@ -28,15 +28,13 @@ export class DashboardComponent implements OnInit {
             if (!taskListNames || taskListNames.length == 0) continue;
             
             for(let listName=0;listName<taskListNames.length;listName++) {
-                console.log(listName)
                 let tasks = this.taskDb.getTasksForList(this.taskTypes[type], taskListNames[listName])
                 if (!tasks) break;
                 
                 let now = new Date();
                 for(let task=0;task<tasks.length;task++) {
                     let taskDate = new Date(tasks[task].dueDate); 
-                    console.log(taskDate)
-                    console.log(now)
+
                     if( taskDate.getFullYear() === now.getFullYear() &&
                         taskDate.getMonth() === now.getMonth() &&
                         taskDate.getDate() === now.getDate()) {
