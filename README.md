@@ -1,7 +1,8 @@
 # angular-task-app
 - Is task app that divides tasks into types and lets users enter when they may be due and how much time they have spent on them 
 - tasks will be grouped into school, work and leisure/errands
-  
+- the db that shows how much time you are spending on tasks per day or by category is not done 
+
 # pages
 - login
 - dashboard
