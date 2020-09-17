@@ -4,11 +4,11 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog'
 
 
 @Component({
-    selector: 'app-sidenav-dialog',
-    templateUrl: './sidenav-dialog.component.html',
-    styleUrls: ['./sidenav-dialog.component.scss'],
+    selector: 'app-list-dialog',
+    templateUrl: './list-dialog.component.html',
+    styleUrls: ['./list-dialog.component.scss'],
 })
-export class SidenavDialogComponent implements OnInit {
+export class ListDialogComponent implements OnInit {
     message: string = ""
     constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
       ngOnInit() {

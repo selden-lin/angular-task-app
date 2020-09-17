@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import {TaskItem} from '../models/TaskItem';
+import { MatDialog } from '@angular/material/dialog';
+
+import {ListDialogComponent} from '../list-dialog/list-dialog.component';
+import {TaskItem} from '../../models/TaskItem';
 
 @Component({
     selector: 'app-single-list-view',
@@ -10,8 +13,8 @@ import {TaskItem} from '../models/TaskItem';
 
 export class SingleListViewComponent implements OnInit {
     taskListItems: TaskItem[] = [];
-    displayedColumns: String[] = ["name","timeSpent", "dueDate"]
-    constructor() {}
+    displayedColumns: String[] = ["name","timeSpent", "dueDate", "done"]
+    constructor(public dialog: MatDialog) {}
 
     ngOnInit(): void {
         this.taskListItems = [
@@ -34,5 +37,17 @@ export class SingleListViewComponent implements OnInit {
                 return 0;
             }
         })
+    }
+
+    openDialog() {
+        const dialogRef = this.dialog.open(ListDialogComponent, {
+            data: {
+                message: "Hello"
+            }
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(`Dialog result: ${result}`);
+        });
     }
 }
