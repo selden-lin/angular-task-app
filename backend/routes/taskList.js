@@ -53,7 +53,13 @@ router.post('/:type', (req, res) => {
 
 // delete a task list
 router.delete('/:type/:listName', (req, res) => {
-
+    TaskModel.deleteOne({
+        'listType': req.params.type,
+        'listName': req.params.listName
+    }, (err, result) => {
+        if (err) res.status(404).send(err)
+        else res.status(200).send('done')
+    })
 })
 
 module.exports = router;
