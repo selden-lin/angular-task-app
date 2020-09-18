@@ -23,10 +23,6 @@ const TaskSchema = new mongoose.Schema({
 })
 const TaskModel = new mongoose.model('task', TaskSchema)
 
-router.get('/', function(req, res, next) {
-    res.send("Hello")
-    //res.render('index', { title: 'Express' });
-});
 
 // get all tasks for a task list of a certain type
 router.get('/all/:type/:listName', (req, res) => {
@@ -110,7 +106,29 @@ router.post('/:type/:listName', (req, res) => {
 
 // update a task
 router.put('/:type/:listName/:taskName', (req, res) => {
-
+    TaskModel.exists({
+        listType: req.params.type,
+        listName: req.params.listName
+    }, (err, existResult) => {
+        if(err) res.status(400).send(err);
+        else if (!existResult) res.send('List does not exist');
+        else {
+            TaskModel.updateOne({
+                listType: req.params.type,
+                listName: req.params.listName,
+                'listItems.name': req.params.taskName
+            }, 
+            {
+                $set: {
+                    "listItems.$.timeSpent": req.body.timeSpent
+                }
+            },
+            (err, addResult) => {
+                if(err) res.status(400).send(err)
+                else res.send('done')
+            })
+        }
+    })
 })
 
 module.exports = router;
