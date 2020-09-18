@@ -35,7 +35,30 @@ router.get('/all/:type/:listName', (req, res) => {
 
 // delete a task
 router.delete('/:type/:listName/:taskName', (req, res) => {
-
+    TaskModel.exists({
+        listType: req.params.type,
+        listName: req.params.listName
+    }, (err, existResult) => {
+        if(err) res.status(400).send(err);
+        else if (!existResult) res.send('List does not exist');
+        else {
+            TaskModel.updateOne({
+                listType: req.params.type,
+                listName: req.params.listName,
+            }, 
+            {
+                $pull: {
+                    "listItems": {
+                        "name": req.params.taskName,
+                    }
+                }
+            },
+            (err, addResult) => {
+                if(err) res.status(400).send(err)
+                else res.send('done')
+            })
+        }
+    })
 })
 
 // create a task for a list
@@ -65,7 +88,6 @@ router.post('/:type/:listName', (req, res) => {
                 else res.send('done')
             })
         }
-        
     })
 })
 
