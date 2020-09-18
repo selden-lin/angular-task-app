@@ -30,7 +30,24 @@ router.get('/', function(req, res, next) {
 
 // get all tasks for a task list of a certain type
 router.get('/all/:type/:listName', (req, res) => {
-
+    TaskModel.exists({
+        listType: req.params.type,
+        listName: req.params.listName
+    }, (err, existResult) => {
+        if(err) res.status(400).send(err);
+        else if (!existResult) res.send('List does not exist');
+        else {
+            TaskModel.findOne({
+                listType: req.params.type,
+                listName: req.params.listName,
+            },
+            (err, result) => {
+                if(err) res.status(400).send(err)
+                else res.send(result.listItems);
+                
+            })
+        }
+    })
 })
 
 // delete a task
