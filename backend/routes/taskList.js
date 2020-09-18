@@ -16,7 +16,19 @@ const TaskModel = new mongoose.model('task')
 
 // get all lists for list type
 router.get('/all/:type', (req, res) => {
-
+    TaskModel
+        .find({'listType': req.params.type})
+        .select('listName')
+        .exec((err, result) => {
+            if (err) res.status(400).send(err)
+            else {
+                let retArr = []
+                result.forEach((row) => {
+                    retArr.push(row.listName)
+                })
+                res.status(200).send(retArr)
+            }
+        })
 })
 
 // Get list types
