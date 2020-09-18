@@ -40,7 +40,33 @@ router.delete('/:type/:listName/:taskName', (req, res) => {
 
 // create a task for a list
 router.post('/:type/:listName', (req, res) => {
-
+    TaskModel.exists({
+        listType: req.params.type,
+        listName: req.params.listName
+    }, (err, existResult) => {
+        if(err) res.status(400).send(err);
+        else if (!existResult) res.send('List does not exist');
+        else {
+            TaskModel.updateOne({
+                listType: req.params.type,
+                listName: req.params.listName,
+            }, 
+            {
+                $push: {
+                    "listItems": {
+                        "name": req.body.name,
+                        "timeSpent": 0,
+                        "dueDate": req.body.dueDate
+                    }
+                }
+            },
+            (err, addResult) => {
+                if(err) res.status(400).send(err)
+                else res.send('done')
+            })
+        }
+        
+    })
 })
 
 // update a task
