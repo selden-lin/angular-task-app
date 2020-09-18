@@ -104,7 +104,7 @@ router.post('/:type/:listName', (req, res) => {
     })
 })
 
-// update a task
+// update time spent of a task
 router.put('/:type/:listName/:taskName', (req, res) => {
     TaskModel.exists({
         listType: req.params.type,
