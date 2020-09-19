@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 import {SidenavDialogComponent} from '../sidenav-dialog/sidenav-dialog.component';
+import {forkJoin} from 'rxjs';
 
 import TaskDataDb from '../../models/TaskDataDb';
 
@@ -11,20 +12,21 @@ import TaskDataDb from '../../models/TaskDataDb';
     styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
-    db: TaskDataDb
     listTypes: string[] = [];
     taskLists = {}
-    constructor(public dialog: MatDialog) {}
+    constructor(public dialog: MatDialog, private db: TaskDataDb) {}
 
     ngOnInit(): void {
-        this.db = new TaskDataDb();
-        this.listTypes = this.db.getTaskListTypes();
-
-        for (let x=0;x<this.listTypes.length;x++) {
-            let type = this.listTypes[x];
-            let taskListNames = this.db.getTaskListNames(type);
-            this.taskLists[type] = taskListNames;
-        }
+        this.db.getTaskListTypes().subscribe((data: any[]) => {
+            this.listTypes = data;
+            for (let x=0;x<this.listTypes.length;x++) {
+                let type = this.listTypes[x];
+                let taskListNames = this.db.getTaskListNames(type)
+                    .subscribe((taskListData: any[]) => {
+                        this.taskLists[type] = taskListData;
+                    });
+            }
+        })
     }
 
     openDialog() {

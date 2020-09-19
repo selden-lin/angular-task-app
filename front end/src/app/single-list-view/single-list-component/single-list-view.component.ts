@@ -14,11 +14,10 @@ import TaskDataDb from '../../models/TaskDataDb';
 })
 export class SingleListViewComponent implements OnInit {
     listType = "";
-    db: TaskDataDb
     listName = "";
     taskListItems: TaskItem[] = [];
     displayedColumns: String[] = ['name', 'timeSpent', 'dueDate', 'done'];
-    constructor(public dialog: MatDialog, private route: ActivatedRoute) {}
+    constructor(public dialog: MatDialog, private route: ActivatedRoute, private db:TaskDataDb) {}
 
     ngOnInit(): void {
         this.route.paramMap.subscribe((params) => {
@@ -27,18 +26,18 @@ export class SingleListViewComponent implements OnInit {
 
             if (!this.listType || !this.listName) return;
 
-            this.db = new TaskDataDb();
-
-            this.taskListItems = this.db.getTasksForList(this.listType, this.listName)
-            .sort((task1, task2) => {
-                if (task1.dueDate < task2.dueDate) {
-                    return -1;
-                } else if (task1.dueDate > task2.dueDate) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            });
+            this.db.getTasksForList(this.listType, this.listName).subscribe((taskListItems: any[]) => {
+                this.taskListItems = taskListItems.sort((task1, task2) => {
+                    if (task1.dueDate < task2.dueDate) {
+                        return -1;
+                    } else if (task1.dueDate > task2.dueDate) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+            })
+            
         });
     }
 

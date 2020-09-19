@@ -7,7 +7,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class ShortenDate implements PipeTransform {
     transform (date) {
-        console.log(date)
         if (typeof date === 'string') {
             date = new Date(date);
             return `${date.getMonth() + 1}/${date.getUTCDate()}/${date.getFullYear()}`;

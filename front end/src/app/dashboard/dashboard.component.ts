@@ -10,10 +10,9 @@ import TaskDataDb from '../models/TaskDataDb';
 export class DashboardComponent implements OnInit {
     todayTaskTable: TaskTableType[] = [];
     tableColumns: string[] = ['name', 'time spent', 'list name', 'list type'];
-    taskDb: TaskDataDb = new TaskDataDb();
-    taskTypes: string[] = ['school', 'errands/leisure', 'work'];
+    taskTypes: string[] = ['school', 'errands-leisure', 'work'];
 
-    constructor() {}
+    constructor(private taskDb: TaskDataDb) {}
 
     ngOnInit(): void {
         this.initTaskTable();
@@ -21,48 +20,60 @@ export class DashboardComponent implements OnInit {
 
     initTaskTable() {
         for (let type = 0; type < this.taskTypes.length; type++) {
-            let taskListNames = this.taskDb.getTaskListNames(
-                this.taskTypes[type]
-            );
+            this.taskDb
+                .getTaskListNames(this.taskTypes[type])
+                .subscribe((taskListNames: any[]) => {
+                    if (!taskListNames || taskListNames.length == 0) return;
 
-            if (!taskListNames || taskListNames.length == 0) continue;
-
-            for (
-                let listName = 0;
-                listName < taskListNames.length;
-                listName++
-            ) {
-                let tasks = this.taskDb.getTasksForList(
-                    this.taskTypes[type],
-                    taskListNames[listName]
-                );
-                if (!tasks) break;
-
-                let now = new Date();
-                for (let task = 0; task < tasks.length; task++) {
-                    let taskDate = new Date(tasks[task].dueDate);
-
-                    if (
-                        taskDate.getFullYear() === now.getFullYear() &&
-                        taskDate.getMonth() === now.getMonth() &&
-                        taskDate.getDate() === now.getDate()
+                    for (
+                        let listName = 0;
+                        listName < taskListNames.length;
+                        listName++
                     ) {
-                        this.todayTaskTable.push({
-                            name: tasks[task].name,
-                            'time spent': tasks[task].timeSpent,
-                            'list name': taskListNames[listName],
-                            'list type': this.taskTypes[type],
-                        });
+                        this.taskDb
+                            .getTasksForList(
+                                this.taskTypes[type],
+                                taskListNames[listName]
+                            )
+                            .subscribe((tasks: any[]) => {
+                                if (!tasks) return;
+
+                                let now = new Date();
+                                for (
+                                    let task = 0;
+                                    task < tasks.length;
+                                    task++
+                                ) {
+                                    let taskDate = new Date(
+                                        tasks[task].dueDate
+                                    );
+
+                                    if (
+                                        taskDate.getFullYear() ===
+                                            now.getFullYear() &&
+                                        taskDate.getMonth() ===
+                                            now.getMonth() &&
+                                        taskDate.getDate() === now.getDate()
+                                    ) {
+                                        this.todayTaskTable.push({
+                                            name: tasks[task].name,
+                                            'time spent': tasks[task].timeSpent,
+                                            'list name':
+                                                taskListNames[listName],
+                                            'list type': this.taskTypes[type],
+                                        });
+                                    }
+                                }
+                            });
                     }
-                }
-            }
+                });
         }
         if (this.todayTaskTable.length == 0) {
             this.todayTaskTable.push({
-                name: "No data",
+                name: 'No data',
                 'time spent': 0,
-                'list name': "No data",
-                'list type': "No data",
+                'list name': 'No data',
+                'list type': 'No data',
             });
         }
     }

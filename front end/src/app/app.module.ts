@@ -20,6 +20,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
+import {HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     LoginModule,
     SingleListViewModule,
     DashboardModule,
-    SidenavModule
+    SidenavModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
