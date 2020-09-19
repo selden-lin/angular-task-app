@@ -1,8 +1,7 @@
 <div class="task-container">
-    <h2>{{listName | titlecase}} Tasks</h2>
+    <h2>{{ listName | titlecase }} Tasks</h2>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="taskListItems">
-
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>Name</th>
                 <td mat-cell *matCellDef="let element">{{ element.name }}</td>
@@ -20,13 +19,18 @@
                 <td mat-cell *matCellDef="let element">
                     {{ element.dueDate | shortenDate }}
                 </td>
-            </ng-container>            
+            </ng-container>
 
             <ng-container matColumnDef="done">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-mini-fab (click)="openEditDialog()" color="warn">
-                        <mat-icon>done</mat-icon>
+                    <button
+                        mat-mini-fab
+                        id="{{ element.name }}"
+                        (click)="openEditDialog($event)"
+                        color="warn"
+                    >
+                        <mat-icon id="{{ element.name }}">done</mat-icon>
                     </button>
                 </td>
             </ng-container>
@@ -39,9 +43,14 @@
     <div class="new-task-container">
         <mat-form-field appearance="fill" class="new-task-input">
             <mat-label>New task</mat-label>
-            <input matInput  [(ngModel)]="newTask"/>
+            <input matInput [(ngModel)]="newTask" />
         </mat-form-field>
-        <button mat-mini-fab color="primary" class="new-task-btn" (click)="openNewTaskDialog()">
+        <button
+            mat-mini-fab
+            color="primary"
+            class="new-task-btn"
+            (click)="openNewTaskDialog()"
+        >
             <mat-icon>add</mat-icon>
         </button>
     </div>

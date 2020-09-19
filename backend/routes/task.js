@@ -88,7 +88,7 @@ router.post('/:type/:listName', (req, res) => {
                 listName: req.params.listName,
             }, 
             {
-                $push: {
+                $addToSet: {
                     "listItems": {
                         "name": req.body.name,
                         "timeSpent": 0,

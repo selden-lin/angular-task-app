@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject  } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
-import {MAT_DIALOG_DATA} from '@angular/material/dialog'
-
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import TaskDataDb from '../../models/TaskDataDb';
 
 @Component({
     selector: 'app-list-dialog',
@@ -9,9 +9,33 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog'
     styleUrls: ['./list-dialog.component.scss'],
 })
 export class ListDialogComponent implements OnInit {
-    message: string = ""
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
-      ngOnInit() {
-        this.message = this.data.message;
-      }
+    listName: string = '';
+    listType: string = '';
+    taskName: string = '';
+    
+    constructor(
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private db: TaskDataDb,
+        public dialogRef: MatDialogRef<ListDialogComponent>
+    ) {}
+
+    ngOnInit() {
+        this.taskName = this.data.taskName;
+        this.listName = this.data.listName;
+        this.listType = this.data.listType;
+    }
+
+    doneTaskClick() {
+        this.db
+            .deleteTaskInList(
+                this.listType,
+                this.listName,
+                this.taskName
+            )
+            .subscribe((data: any[]) => {
+                this.dialogRef.close({
+                    'deletedTask': this.taskName
+                });
+            });
+    }
 }

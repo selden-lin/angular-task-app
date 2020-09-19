@@ -52,15 +52,27 @@ export class SingleListViewComponent implements OnInit {
         });
     }
 
-    openEditDialog() {
+    openEditDialog(event) {
+        let taskName = '';
+        if(event.target.nodeName === 'SPAN') {
+            taskName = event.target.parentNode.id;
+        } else if (event.target.nodeName === 'MAT-ICON' || event.target.nodeName === 'BUTTON') {
+            taskName = event.target.id;
+        } else return;
+        
         let dialogRef = this.dialog.open(ListDialogComponent, {
             data: {
-                message: 'Hello',
+                listType: this.listType,
+                listName: this.listName,
+                taskName: taskName
             },
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
+            this.taskListItems = this.taskListItems.filter((item) => {
+                return item.name != result.deletedTask
+            })
+            this.table.renderRows();
         });
     }
 
