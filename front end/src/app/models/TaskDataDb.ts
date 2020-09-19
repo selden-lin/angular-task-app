@@ -1,5 +1,5 @@
 import * as data from './taskData.json';
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export default class TaskDataDb {
     taskData: {};
+    @Output() change: EventEmitter<boolean> = new EventEmitter();
 
     constructor(private http: HttpClient) {
         this.taskData = data.default;
@@ -80,7 +81,18 @@ export default class TaskDataDb {
             );
     }
 
-    deleteTaskList(taskCategory: string, taskList: string) {}
+    deleteTaskList(taskCategory: string, taskList: string) {
+        return this.http
+            .delete<any>(
+                'http://localhost:3000/taskList/' + taskCategory + '/' + taskList,
+                {}
+            )
+            .pipe(
+                map((response) => {
+                    return response;
+                })
+            );
+    }
 
     deleteTaskInList(taskCategory: string, taskList: string, taskName: string) {
         return this.http
@@ -108,5 +120,9 @@ export default class TaskDataDb {
                     return response;
                 })
             );
+    }
+
+    toggleSidenavList() {
+        this.change.emit(true);
     }
 }

@@ -1,5 +1,9 @@
 <div class="task-container">
+    <button class="delete-btn" (click)="openDeleteListDialog()" mat-flat-button color="warn">
+        <mat-icon>delete</mat-icon>Delete list
+    </button>
     <h2>{{ listName | titlecase }} Tasks</h2>
+    
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="taskListItems">
             <ng-container matColumnDef="name">

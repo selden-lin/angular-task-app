@@ -16,15 +16,9 @@ export class SidenavComponent implements OnInit {
     constructor(public dialog: MatDialog, private db: TaskDataDb) {}
 
     ngOnInit(): void {
-        this.db.getTaskListTypes().subscribe((data: any[]) => {
-            this.listTypes = data;
-            for (let x=0;x<this.listTypes.length;x++) {
-                let type = this.listTypes[x];
-                let taskListNames = this.db.getTaskListNames(type)
-                    .subscribe((taskListData: any[]) => {
-                        this.taskLists[type] = taskListData;
-                    });
-            }
+        this.getTaskLists();
+        this.db.change.subscribe(result => {
+            this.getTaskLists();
         })
     }
 
@@ -36,5 +30,18 @@ export class SidenavComponent implements OnInit {
             if(result === undefined) return;
             this.taskLists[result.data.type].push(result.data.listName)
         });
+    }
+
+    getTaskLists () {
+        this.db.getTaskListTypes().subscribe((data: any[]) => {
+            this.listTypes = data;
+            for (let x=0;x<this.listTypes.length;x++) {
+                let type = this.listTypes[x];
+                let taskListNames = this.db.getTaskListNames(type)
+                    .subscribe((taskListData: any[]) => {
+                        this.taskLists[type] = taskListData;
+                    });
+            }
+        })
     }
 }

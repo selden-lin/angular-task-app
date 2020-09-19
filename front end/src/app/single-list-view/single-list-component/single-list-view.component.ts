@@ -1,11 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, HostBinding } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
+import {SidenavComponent} from '../../sidenav/sidenav-component/sidenav.component'
 import { ListDialogComponent } from '../list-dialog/list-dialog.component';
 import { NewTaskDialogComponent } from '../new-task-dialog/new-task-dialog.component';
+import {DeleteListDialogComponent} from '../delete-list-dialog/delete-list-dialog.component'
+
+import {Router} from '@angular/router';
 import { TaskItem } from '../../models/TaskItem';
 import TaskDataDb from '../../models/TaskDataDb';
 
@@ -15,18 +20,22 @@ import TaskDataDb from '../../models/TaskDataDb';
     styleUrls: ['./single-list-view.component.scss'],
 })
 export class SingleListViewComponent implements OnInit {
+    @ViewChild(MatTable) table: MatTable<any>;
+    @HostBinding('')
+    @Input() sidenav: SidenavComponent;
+    
     listType = '';
     listName = '';
     newTask = '';
     taskListItems: TaskItem[] = [];
-
     displayedColumns: String[] = ['name', 'timeSpent', 'dueDate', 'done'];
 
-    @ViewChild(MatTable) table: MatTable<any>;
     constructor(
         public dialog: MatDialog,
         private route: ActivatedRoute,
         private db: TaskDataDb,
+        private router: Router,
+        private _snackBar: MatSnackBar
     ) {}
 
     ngOnInit(): void {
@@ -113,6 +122,24 @@ export class SingleListViewComponent implements OnInit {
             });
             this.table.renderRows();
             this.newTask = "";
+        });
+    }
+
+    openDeleteListDialog() {
+        let dialogRef = this.dialog.open(DeleteListDialogComponent, {
+            data: {
+                listType: this.listType,
+                listName: this.listName,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            if (!result) return;
+            if (result.deleted) {
+                this._snackBar.open(`list ${this.listName} deleted`, "Ok", {});
+                this.router.navigate(['/'])
+                this.db.toggleSidenavList();
+            }
         });
     }
 }

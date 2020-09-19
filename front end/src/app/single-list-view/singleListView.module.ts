@@ -4,10 +4,12 @@ import {CommonModule} from '@angular/common';
 import {SingleListViewComponent} from './single-list-component/single-list-view.component';
 import {ListDialogComponent} from './list-dialog/list-dialog.component';
 import {NewTaskDialogComponent} from './new-task-dialog/new-task-dialog.component';
+import {DeleteListDialogComponent} from './delete-list-dialog/delete-list-dialog.component'
 import {ShortenDate} from './shortenDate.pipe';
 
 import {FormsModule} from "@angular/forms";
 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -21,7 +23,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         SingleListViewComponent,
         ListDialogComponent,
         ShortenDate,
-        NewTaskDialogComponent
+        NewTaskDialogComponent,
+        DeleteListDialogComponent
     ],
     imports: [
         CommonModule,
@@ -32,7 +35,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatInputModule,
         MatDividerModule,
         MatDialogModule,
-        FormsModule
+        FormsModule,
+        MatSnackBarModule
     ],
     providers: [],
 })
