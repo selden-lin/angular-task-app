@@ -13,6 +13,12 @@
   - npm install
   - ng serve --open
 
+# screenshots
+## dashboard
+![dashboard img](https://github.com/selden-lin/angular-task-app/blob/master/dashboard.png)
+## task list view
+![task list img](https://github.com/selden-lin/angular-task-app/blob/master/taskList.png)
+
 # pages
 - login
 - dashboard
