@@ -68,7 +68,7 @@ router.delete('/:type/:listName/:taskName', (req, res) => {
             },
             (err, addResult) => {
                 if(err) res.status(400).send(err)
-                else res.send('done')
+                else res.send({})
             })
         }
     })
@@ -98,7 +98,7 @@ router.post('/:type/:listName', (req, res) => {
             },
             (err, addResult) => {
                 if(err) res.status(400).send(err)
-                else res.send('done')
+                else res.send({})
             })
         }
     })
@@ -125,7 +125,7 @@ router.put('/:type/:listName/:taskName', (req, res) => {
             },
             (err, addResult) => {
                 if(err) res.status(400).send(err)
-                else res.send('done')
+                else res.send({})
             })
         }
     })

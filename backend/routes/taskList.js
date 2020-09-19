@@ -47,7 +47,7 @@ router.post('/:type', (req, res) => {
             console.log(err)
             res.status(400).send(err)
         }
-        else res.status(200).send('done')
+        else res.status(200).send({})
     })
 })
 
@@ -58,7 +58,7 @@ router.delete('/:type/:listName', (req, res) => {
         'listName': req.params.listName
     }, (err, result) => {
         if (err) res.status(400).send(err)
-        else res.status(200).send('done')
+        else res.status(200).send({})
     })
 })
 

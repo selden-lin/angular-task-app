@@ -29,7 +29,11 @@ export default class TaskDataDb {
             .pipe(map(response => { return response; }));
     }
 
-    addNewList(taskCategory: string, taskList: string) {}
+    addNewList(taskCategory: string, taskList: string) {
+        return this.http.post<any>('http://localhost:3000/taskList/'+taskCategory,{
+            'listName': taskList
+        }).pipe(map(response => { return response; }));
+    }
 
     addTaskToList(taskCategory: string, taskList: string, newTask) {
         if (!this.taskData[taskCategory]?.[taskList]) {

@@ -29,15 +29,12 @@ export class SidenavComponent implements OnInit {
         })
     }
 
-    openDialog() {
-        const dialogRef = this.dialog.open(SidenavDialogComponent, {
-            data: {
-                message: "Hello"
-            }
-        });
+    openDialog(event) {
+        const dialogRef = this.dialog.open(SidenavDialogComponent, {});
+        dialogRef.componentInstance.type = event.srcElement.id;
 
         dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
+            this.taskLists[result.data.type].push(result.data.listName)
         });
     }
 }

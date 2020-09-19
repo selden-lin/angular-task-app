@@ -1,17 +1,23 @@
 <mat-accordion *ngFor="let type of listTypes">
     <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header class="expansion-red">
-            <mat-panel-title>
-                {{type | titlecase}} lists
-            </mat-panel-title>
+            <mat-panel-title> {{ type | titlecase }} lists </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="expansion-panel-content">
-            <a mat-button 
-                [routerLink]="['/taskList', type, list]" 
+            <a
+                mat-button
+                [routerLink]="['/taskList', type, list]"
                 *ngFor="let list of taskLists[type]"
-                >{{list}}</a>
+                >{{ list }}</a
+            >
             <p>
-                <a mat-button (click)="openDialog()" class="add-list-icon"><mat-icon aria-hidden="false">add</mat-icon></a>
+                <a
+                    mat-button
+                    (click)="openDialog($event)"
+                    id="{{ type }}"
+                    class="add-list-icon"
+                    ><mat-icon id="{{ type }}">add</mat-icon></a
+                >
             </p>
         </div>
     </mat-expansion-panel>

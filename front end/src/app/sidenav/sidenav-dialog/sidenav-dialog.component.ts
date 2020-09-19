@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject  } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
-import {MAT_DIALOG_DATA} from '@angular/material/dialog'
-
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import TaskDataDb from '../../models/TaskDataDb';
 
 @Component({
     selector: 'app-sidenav-dialog',
@@ -9,9 +9,24 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog'
     styleUrls: ['./sidenav-dialog.component.scss'],
 })
 export class SidenavDialogComponent implements OnInit {
-    message: string = ""
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
-      ngOnInit() {
-        this.message = this.data.message;
-      }
+    listName: string = '';
+
+    constructor(
+        @Inject(MAT_DIALOG_DATA) public type: any,
+        private db: TaskDataDb,
+        public dialogRef: MatDialogRef<SidenavDialogComponent>
+    ) {}
+
+    ngOnInit() {}
+
+    newListClick() {
+        this.db.addNewList(this.type, this.listName).subscribe((data) => {
+            this.dialogRef.close({
+                data: {
+                    'type': this.type,
+                    'listName': this.listName
+                },
+            });
+        });
+    }
 }
