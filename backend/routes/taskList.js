@@ -38,16 +38,28 @@ router.get('/types', (req, res) => {
 
 // make a new task list
 router.post('/:type', (req, res) => {
-    TaskModel.create({
+    TaskModel.exists({
         'listName': req.body.listName,
-        'listType': req.params.type,
-        'listItems': []
+        'listType': req.params.type
     }, (err, result) => {
-        if(err) {
-            console.log(err)
-            res.status(400).send(err)
+        console.log(result)
+        if (result) {
+            res.send({
+                "data": "exists"
+            })
+            return;
         }
-        else res.status(200).send({})
+        TaskModel.create({
+            'listName': req.body.listName,
+            'listType': req.params.type,
+            'listItems': []
+        }, (err, result) => {
+            if(err) {
+                console.log(err)
+                res.status(400).send(err)
+            }
+            else res.status(200).send({})
+        })
     })
 })
 

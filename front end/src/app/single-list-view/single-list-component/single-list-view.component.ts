@@ -103,7 +103,14 @@ export class SingleListViewComponent implements OnInit {
     }
 
     openNewTaskDialog() {
-        if (this.newTask.trim() === '') return;
+        if (this.newTask.trim() === '') {
+            this._snackBar.open(
+                `Enter name for task`,
+                'Ok',
+                {}
+            );
+            return;
+        }
         let dialogRef = this.dialog.open(NewTaskDialogComponent, {
             data: {
                 type: this.listType,
@@ -113,8 +120,17 @@ export class SingleListViewComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((newTaskResult) => {
+            console.log(typeof newTaskResult)
             if (newTaskResult === undefined) return;
-
+            if (newTaskResult.exists) {
+                this._snackBar.open(
+                    `list ${newTaskResult.newTask} already exists`,
+                    'Ok',
+                    {}
+                );
+                return;
+            }
+            
             this.taskListItems.push({
                 name: newTaskResult.newTask,
                 dueDate: newTaskResult.dueDate,

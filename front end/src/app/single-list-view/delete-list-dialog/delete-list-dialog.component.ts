@@ -32,7 +32,6 @@ export class DeleteListDialogComponent implements OnInit {
                 this.listName
             )
             .subscribe((data: any[]) => {
-                console.log("done")
                 this.dialogRef.close({
                     'deleted': true
                 });

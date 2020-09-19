@@ -21,12 +21,22 @@ export class SidenavDialogComponent implements OnInit {
 
     newListClick() {
         this.db.addNewList(this.type, this.listName).subscribe((data) => {
-            this.dialogRef.close({
-                data: {
-                    'type': this.type,
-                    'listName': this.listName
-                },
-            });
+            if(data.data === 'exists') {
+                this.dialogRef.close({
+                    data: {
+                        'exists': true,
+                        'listName': this.listName
+                    },
+                });
+            } else {
+                this.dialogRef.close({
+                    data: {
+                        'exists': false,
+                        'type': this.type,
+                        'listName': this.listName
+                    },
+                });
+            }
         });
     }
 }

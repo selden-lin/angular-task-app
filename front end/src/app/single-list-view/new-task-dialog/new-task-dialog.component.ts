@@ -37,11 +37,19 @@ export class NewTaskDialogComponent implements OnInit {
                 this.newTask,
                 this.dueDate
             )
-            .subscribe((data: any[]) => {
-                this.dialogRef.close({
-                    'newTask': this.newTask,
-                    'dueDate': this.dueDate
-                });
+            .subscribe((data) => {
+                if(data.data === 'exists') {
+                    this.dialogRef.close({
+                        'exists': true,
+                        'newTask': this.newTask
+                    });
+                } else {
+                    this.dialogRef.close({
+                        'exists': false,
+                        'newTask': this.newTask,
+                        'dueDate': this.dueDate
+                    });
+                }
             });
     }
 }
