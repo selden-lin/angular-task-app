@@ -3,13 +3,13 @@
     <div>
         <mat-form-field appearance="fill">
             <mat-label>Additional time spent</mat-label>
-            <input matInput />
+            <input matInput type="number" min=1 [(ngModel)]="additionalTimeSpent"/>
         </mat-form-field>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button mat-dialog-close>Save</button>
+    <button mat-button mat-dialog-close (click)="increaseTimeSpentClick()">Save</button>
     <button
         mat-flat-button
         [mat-dialog-close]="true"

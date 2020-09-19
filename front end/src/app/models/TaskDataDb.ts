@@ -94,4 +94,19 @@ export default class TaskDataDb {
                 })
             );
     }
+
+    increaseTimeSpentForTask(taskCategory: string, taskList: string, taskName: string, timeSpent: Number) {
+        return this.http
+            .put<any>(
+                'http://localhost:3000/task/' + taskCategory + '/' + taskList + '/' + taskName,
+                {
+                    'timeSpent': timeSpent 
+                }
+            )
+            .pipe(
+                map((response) => {
+                    return response;
+                })
+            );
+    }
 }

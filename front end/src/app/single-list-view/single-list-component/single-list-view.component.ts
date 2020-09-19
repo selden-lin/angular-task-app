@@ -53,25 +53,42 @@ export class SingleListViewComponent implements OnInit {
     }
 
     openEditDialog(event) {
-        let taskName = '';
+        let taskInfo = '';
         if(event.target.nodeName === 'SPAN') {
-            taskName = event.target.parentNode.id;
+            taskInfo = event.target.parentNode.id;
         } else if (event.target.nodeName === 'MAT-ICON' || event.target.nodeName === 'BUTTON') {
-            taskName = event.target.id;
+            taskInfo = event.target.id;
         } else return;
         
+        let taskName = taskInfo.split(':')[0];
+        let timeSpent = taskInfo.split(':')[1]
+
         let dialogRef = this.dialog.open(ListDialogComponent, {
             data: {
                 listType: this.listType,
                 listName: this.listName,
-                taskName: taskName
+                'taskName': taskName,
+                'timeSpent': timeSpent
             },
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-            this.taskListItems = this.taskListItems.filter((item) => {
-                return item.name != result.deletedTask
-            })
+            if(!result) return; 
+
+            if(result.deletedTask) {
+                this.taskListItems = this.taskListItems.filter((item) => {
+                    return item.name != result.deletedTask
+                })
+            } else if(result.timeSpent) {
+                this.taskListItems = this.taskListItems.map((item) => {
+                    if(item.name != result.taskName) {
+                        return item;
+                    }  else {
+                        item.timeSpent = result.timeSpent;
+                        return item;
+                    }
+                })
+            }
             this.table.renderRows();
         });
     }

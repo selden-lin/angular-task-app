@@ -26,11 +26,11 @@
                 <td mat-cell *matCellDef="let element">
                     <button
                         mat-mini-fab
-                        id="{{ element.name }}"
+                        id="{{ element.name }}:{{ element.timeSpent}}"
                         (click)="openEditDialog($event)"
                         color="warn"
                     >
-                        <mat-icon id="{{ element.name }}">done</mat-icon>
+                        <mat-icon id="{{ element.name }}:{{ element.timeSpent}}">done</mat-icon>
                     </button>
                 </td>
             </ng-container>

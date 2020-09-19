@@ -12,6 +12,8 @@ export class ListDialogComponent implements OnInit {
     listName: string = '';
     listType: string = '';
     taskName: string = '';
+    timeSpent: string = '';
+    additionalTimeSpent: number = 1;
     
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,6 +25,7 @@ export class ListDialogComponent implements OnInit {
         this.taskName = this.data.taskName;
         this.listName = this.data.listName;
         this.listType = this.data.listType;
+        this.timeSpent = this.data.timeSpent;
     }
 
     doneTaskClick() {
@@ -35,6 +38,22 @@ export class ListDialogComponent implements OnInit {
             .subscribe((data: any[]) => {
                 this.dialogRef.close({
                     'deletedTask': this.taskName
+                });
+            });
+    }
+
+    increaseTimeSpentClick() {
+        this.db
+            .increaseTimeSpentForTask(
+                this.listType,
+                this.listName,
+                this.taskName,
+                parseInt(this.timeSpent) + this.additionalTimeSpent
+            )
+            .subscribe((data: any[]) => {
+                this.dialogRef.close({
+                    'timeSpent': parseInt(this.timeSpent) + this.additionalTimeSpent,
+                    'taskName': this.taskName
                 });
             });
     }
