@@ -2,7 +2,7 @@
 - Is task app that divides tasks into types and lets users enter when they may be due and how much time they have spent on them 
 - tasks will be grouped into school, work and leisure/errands types
 - task lists are in sidenav and main page shows what tasks are due today
-- Uses angular/typescript, expressJs and mongodb 
+- Uses angular/typescript, angular material ui, expressJs and mongodb 
 
 # local setup
 - clone repo
