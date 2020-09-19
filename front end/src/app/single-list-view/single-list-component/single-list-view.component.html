@@ -1,5 +1,5 @@
 <div class="task-container">
-    <h2>Tasks</h2>
+    <h2>{{listName | titlecase}} Tasks</h2>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="taskListItems">
 
@@ -25,7 +25,7 @@
             <ng-container matColumnDef="done">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-mini-fab (click)="openDialog()" color="warn">
+                    <button mat-mini-fab (click)="openEditDialog()" color="warn">
                         <mat-icon>done</mat-icon>
                     </button>
                 </td>
@@ -39,9 +39,9 @@
     <div class="new-task-container">
         <mat-form-field appearance="fill" class="new-task-input">
             <mat-label>New task</mat-label>
-            <input matInput />
+            <input matInput  [(ngModel)]="newTask"/>
         </mat-form-field>
-        <button mat-mini-fab color="primary" class="new-task-btn">
+        <button mat-mini-fab color="primary" class="new-task-btn" (click)="openNewTaskDialog()">
             <mat-icon>add</mat-icon>
         </button>
     </div>

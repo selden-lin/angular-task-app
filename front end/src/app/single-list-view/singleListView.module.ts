@@ -3,7 +3,10 @@ import {CommonModule} from '@angular/common';
 
 import {SingleListViewComponent} from './single-list-component/single-list-view.component';
 import {ListDialogComponent} from './list-dialog/list-dialog.component';
+import {NewTaskDialogComponent} from './new-task-dialog/new-task-dialog.component';
 import {ShortenDate} from './shortenDate.pipe';
+
+import {FormsModule} from "@angular/forms";
 
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
@@ -17,7 +20,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     declarations: [
         SingleListViewComponent,
         ListDialogComponent,
-        ShortenDate
+        ShortenDate,
+        NewTaskDialogComponent
     ],
     imports: [
         CommonModule,
@@ -27,7 +31,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatFormFieldModule,
         MatInputModule,
         MatDividerModule,
-        MatDialogModule
+        MatDialogModule,
+        FormsModule
     ],
     providers: [],
 })

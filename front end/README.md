@@ -15,3 +15,4 @@
 - add database to store data
 - allow students to see how long projects in courses take to better plan schedules
 - make mobile friendly
+- add error messages for text fields

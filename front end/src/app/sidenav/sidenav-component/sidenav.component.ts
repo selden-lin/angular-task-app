@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 import {SidenavDialogComponent} from '../sidenav-dialog/sidenav-dialog.component';
-import {forkJoin} from 'rxjs';
 
 import TaskDataDb from '../../models/TaskDataDb';
 
@@ -34,6 +33,7 @@ export class SidenavComponent implements OnInit {
         dialogRef.componentInstance.type = event.srcElement.id;
 
         dialogRef.afterClosed().subscribe((result) => {
+            if(result === undefined) return;
             this.taskLists[result.data.type].push(result.data.listName)
         });
     }

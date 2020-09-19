@@ -35,13 +35,11 @@ export default class TaskDataDb {
         }).pipe(map(response => { return response; }));
     }
 
-    addTaskToList(taskCategory: string, taskList: string, newTask) {
-        if (!this.taskData[taskCategory]?.[taskList]) {
-            return false;
-        }
-
-        this.taskData[taskCategory][taskList].append(newTask);
-        return true;
+    addTaskToList(taskCategory: string, taskList: string, newTask: string, dueDate) {
+        return this.http.post<any>('http://localhost:3000/task/'+taskCategory+'/'+taskList,{
+            "name": newTask,
+            "dueDate": dueDate
+        }).pipe(map(response => { return response; }));
     }
 
     deleteTaskList(taskCategory: string, taskList: string) {}

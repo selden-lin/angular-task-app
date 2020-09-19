@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{newTask | titlecase}}</h2>
+<mat-dialog-content class="mat-typography">
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Due date</mat-label>
+            <input matInput type="date" [(ngModel)]="dueDate"/>
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close (click)="addTaskClick()">Save</button>
+</mat-dialog-actions>

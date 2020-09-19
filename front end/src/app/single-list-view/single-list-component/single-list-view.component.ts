@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 
 import { ListDialogComponent } from '../list-dialog/list-dialog.component';
+import { NewTaskDialogComponent } from '../new-task-dialog/new-task-dialog.component';
 import { TaskItem } from '../../models/TaskItem';
 import TaskDataDb from '../../models/TaskDataDb';
 
@@ -13,11 +15,19 @@ import TaskDataDb from '../../models/TaskDataDb';
     styleUrls: ['./single-list-view.component.scss'],
 })
 export class SingleListViewComponent implements OnInit {
-    listType = "";
-    listName = "";
+    listType = '';
+    listName = '';
+    newTask = '';
     taskListItems: TaskItem[] = [];
+
     displayedColumns: String[] = ['name', 'timeSpent', 'dueDate', 'done'];
-    constructor(public dialog: MatDialog, private route: ActivatedRoute, private db:TaskDataDb) {}
+
+    @ViewChild(MatTable) table: MatTable<any>;
+    constructor(
+        public dialog: MatDialog,
+        private route: ActivatedRoute,
+        private db: TaskDataDb,
+    ) {}
 
     ngOnInit(): void {
         this.route.paramMap.subscribe((params) => {
@@ -26,23 +36,24 @@ export class SingleListViewComponent implements OnInit {
 
             if (!this.listType || !this.listName) return;
 
-            this.db.getTasksForList(this.listType, this.listName).subscribe((taskListItems: any[]) => {
-                this.taskListItems = taskListItems.sort((task1, task2) => {
-                    if (task1.dueDate < task2.dueDate) {
-                        return -1;
-                    } else if (task1.dueDate > task2.dueDate) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
+            this.db
+                .getTasksForList(this.listType, this.listName)
+                .subscribe((taskListItems: any[]) => {
+                    this.taskListItems = taskListItems.sort((task1, task2) => {
+                        if (task1.dueDate < task2.dueDate) {
+                            return -1;
+                        } else if (task1.dueDate > task2.dueDate) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    });
                 });
-            })
-            
         });
     }
 
-    openDialog() {
-        const dialogRef = this.dialog.open(ListDialogComponent, {
+    openEditDialog() {
+        let dialogRef = this.dialog.open(ListDialogComponent, {
             data: {
                 message: 'Hello',
             },
@@ -50,6 +61,29 @@ export class SingleListViewComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe((result) => {
             console.log(`Dialog result: ${result}`);
+        });
+    }
+
+    openNewTaskDialog() {
+        if (this.newTask.trim() === '') return;
+        let dialogRef = this.dialog.open(NewTaskDialogComponent, {
+            data: {
+                type: this.listType,
+                name: this.listName,
+                newTask: this.newTask,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((newTaskResult) => {
+            if (newTaskResult === undefined) return;
+
+            this.taskListItems.push({
+                name: newTaskResult.newTask,
+                dueDate: newTaskResult.dueDate,
+                timeSpent: 0,
+            });
+            this.table.renderRows();
+            this.newTask = "";
         });
     }
 }
