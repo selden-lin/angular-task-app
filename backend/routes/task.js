@@ -94,6 +94,7 @@ router.post('/:type/:listName', (req, res) => {
                     })
                     return;
                 }
+                let zoneOffset = new Date().getTimezoneOffset()
                 TaskModel.updateOne({
                     listType: req.params.type,
                     listName: req.params.listName,
@@ -103,9 +104,10 @@ router.post('/:type/:listName', (req, res) => {
                         "listItems": {
                             "name": req.body.name,
                             "timeSpent": 0,
-                            "dueDate": req.body.dueDate
+                            "dueDate": new Date(new Date(req.body.dueDate).getTime() + zoneOffset * 60000)
                         }
                     }
+                    
                 },
                 (err, addResult) => {
                     if(err) res.status(400).send(err)

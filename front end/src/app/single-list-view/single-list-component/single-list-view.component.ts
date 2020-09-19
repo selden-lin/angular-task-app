@@ -120,7 +120,6 @@ export class SingleListViewComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((newTaskResult) => {
-            console.log(typeof newTaskResult)
             if (newTaskResult === undefined) return;
             if (newTaskResult.exists) {
                 this._snackBar.open(

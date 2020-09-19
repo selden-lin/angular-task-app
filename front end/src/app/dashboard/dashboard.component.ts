@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { MatTable } from '@angular/material/table';
 
 import TaskDataDb from '../models/TaskDataDb';
 
@@ -8,6 +10,7 @@ import TaskDataDb from '../models/TaskDataDb';
     styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+    @ViewChild(MatTable) table: MatTable<any>;
     todayTaskTable: TaskTableType[] = [];
     tableColumns: string[] = ['name', 'time spent', 'list name', 'list type'];
     taskTypes: string[] = ['school', 'errands-leisure', 'work'];
@@ -38,16 +41,15 @@ export class DashboardComponent implements OnInit {
                             .subscribe((tasks: any[]) => {
                                 if (!tasks) return;
 
-                                let now = new Date();
                                 for (
                                     let task = 0;
                                     task < tasks.length;
                                     task++
                                 ) {
+                                    let now = new Date();
                                     let taskDate = new Date(
                                         tasks[task].dueDate
                                     );
-
                                     if (
                                         taskDate.getFullYear() ===
                                             now.getFullYear() &&
@@ -64,17 +66,18 @@ export class DashboardComponent implements OnInit {
                                         });
                                     }
                                 }
+                                if (this.todayTaskTable.length == 0 && type == this.taskTypes.length - 1) {
+                                    this.todayTaskTable.push({
+                                        name: 'No data',
+                                        'time spent': 0,
+                                        'list name': 'No data',
+                                        'list type': 'No data',
+                                    });
+                                } 
+                                this.table.renderRows();
                             });
                     }
                 });
-        }
-        if (this.todayTaskTable.length == 0) {
-            this.todayTaskTable.push({
-                name: 'No data',
-                'time spent': 0,
-                'list name': 'No data',
-                'list type': 'No data',
-            });
         }
     }
 }
